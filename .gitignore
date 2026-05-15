@@ -9,6 +9,8 @@ Thumbs.db
 
 # Local plan/notes
 .claude/
+.playwright-mcp/
+.mcp.json
 
 # Logs / temp
 *.log

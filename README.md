@@ -6,6 +6,8 @@
 
 **Live demo:** <https://jsisnawan.github.io/claude-course/>
 
+![Travel Explorer screenshot](docs/screenshot.png)
+
 A stylish, editorial-magazine-style single-page travel discovery site. 12 curated Asia-Pacific city guides, interactive travel tools, and a polished light/dark experience — built with **only HTML, CSS, and JavaScript**. No frameworks, no build step, no backend.
 
 ## Features
