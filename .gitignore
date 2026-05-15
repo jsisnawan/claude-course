@@ -1,0 +1,15 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Local plan/notes
+.claude/
+
+# Logs / temp
+*.log
+*.tmp

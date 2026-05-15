@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Travel Explorer — We went, so you know where to go.</title>
+  <meta name="description" content="Curated travel guides with real prices, realistic itineraries, airport tips, safety notes, weather insights, and local recommendations." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("travelExplorer.theme");
+        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var theme = saved || (prefersDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body>
+
+  <header class="nav" id="home">
+    <div class="nav-inner">
+      <a href="#home" class="brand" aria-label="Travel Explorer home">
+        <svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true">
+          <circle cx="20" cy="20" r="15" fill="none" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M20 6 L22.6 20 L20 34 L17.4 20 Z" fill="currentColor"/>
+          <path d="M6 20 L20 17.4 L34 20 L20 22.6 Z" fill="currentColor" opacity="0.5"/>
+        </svg>
+        <span>Travel Explorer</span>
+      </a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#home">Home</a>
+        <a href="#guides">Guides</a>
+        <a href="#cities">Cities</a>
+        <a href="#tools">Travel Tools</a>
+        <a href="#weather">Weather</a>
+        <a href="#safety">Safety</a>
+        <a href="#enquiry">Enquiry</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light or dark theme" type="button">
+          <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+          <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/>
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-bg img-wrap" aria-hidden="true">
+      <img src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=2000&q=80"
+           alt=""
+           data-sources='["https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=2000&q=80","https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2000&q=80","https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=2000&q=80"]'
+           data-index="0"
+           onerror="window.__tryNextImg(this)" />
+    </div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-content">
+      <p class="eyebrow">A travel magazine</p>
+      <h1>We went, so you know where to go.</h1>
+      <p class="hero-sub">Curated travel guides with real prices, realistic itineraries, airport tips, safety notes, weather insights, and local recommendations.</p>
+      <div class="hero-cta">
+        <a href="#guides" class="btn btn-primary">Read Latest Guide</a>
+        <a href="#enquiry" class="btn btn-ghost">Send Enquiry</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured" aria-label="Featured guide">
+    <div class="container">
+      <article class="featured-card" id="featured-card">
+        <!-- Filled by JS -->
+      </article>
+    </div>
+  </section>
+
+  <section id="guides" class="section">
+    <div class="container">
+      <p class="eyebrow">Guides</p>
+      <h2 class="section-title">Real prices, real itineraries, no fluff.</h2>
+      <p class="section-lede">We hop on the plane, walk the streets, eat at the hole-in-the-wall noodle shop, and bring back honest notes on twelve of Asia-Pacific's most loved cities.</p>
+    </div>
+  </section>
+
+  <section id="cities" class="section section-tight">
+    <div class="container">
+      <div class="cities-grid" id="cities-grid">
+        <!-- City cards rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <section id="tools" class="section section-alt">
+    <div class="container">
+      <p class="eyebrow">Travel Tools</p>
+      <h2 class="section-title">Plan it before you board.</h2>
+
+      <div class="tool-card">
+        <h3>Trip Budget Calculator</h3>
+        <div class="tool-grid">
+          <label>Destination
+            <select id="budget-destination"></select>
+          </label>
+          <label>Travellers
+            <input type="number" id="budget-travellers" min="1" value="2" />
+          </label>
+          <label>Days
+            <input type="number" id="budget-days" min="1" value="5" />
+          </label>
+          <label>Daily budget per person (SGD)
+            <input type="number" id="budget-daily" min="0" value="150" />
+          </label>
+        </div>
+        <div class="tool-result">
+          <span>Estimated total</span>
+          <strong id="budget-total">SGD 1,500</strong>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <h3>Currency Converter</h3>
+        <div class="tool-grid">
+          <label>Amount (SGD)
+            <input type="number" id="fx-amount" min="0" value="100" />
+          </label>
+          <label>Convert to
+            <select id="fx-target"></select>
+          </label>
+        </div>
+        <div class="tool-result">
+          <span>Approx</span>
+          <strong id="fx-result">—</strong>
+        </div>
+        <p class="tool-note">Static reference rates. Swap in a live FX API for production.</p>
+      </div>
+
+      <div class="tool-card">
+        <h3>Packing Checklist</h3>
+        <p class="tool-note">Your ticks save automatically.</p>
+        <div class="packing" id="packing"></div>
+      </div>
+
+      <div class="tool-card">
+        <h3>Itinerary Planner</h3>
+        <form id="itinerary-form" class="tool-grid" autocomplete="off">
+          <label>Day
+            <input type="number" id="itin-day" min="1" value="1" required />
+          </label>
+          <label>Time
+            <input type="time" id="itin-time" required />
+          </label>
+          <label class="span-2">Activity
+            <input type="text" id="itin-activity" placeholder="Visit Marina Bay Gardens" required />
+          </label>
+          <label class="span-2">Notes
+            <input type="text" id="itin-notes" placeholder="Buy tickets in advance" />
+          </label>
+          <button type="submit" class="btn btn-primary span-2">Add to itinerary</button>
+        </form>
+        <ul class="itinerary-list" id="itinerary-list"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="weather" class="section">
+    <div class="container">
+      <p class="eyebrow">Weather</p>
+      <h2 class="section-title">Check before you pack.</h2>
+      <div class="weather-card">
+        <form id="weather-form" class="weather-form" autocomplete="off">
+          <input type="text" id="weather-city" placeholder="Type a city (e.g. Tokyo)" required />
+          <button type="submit" class="btn btn-primary">Check Weather</button>
+        </form>
+        <div class="weather-result" id="weather-result" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="safety" class="section section-alt">
+    <div class="container">
+      <p class="eyebrow">Safety</p>
+      <h2 class="section-title">Travel smart, travel safe.</h2>
+      <p class="section-lede">General advisories — always cross-check with your government's travel notices before you fly.</p>
+
+      <div class="safety-grid">
+        <div class="safety-tip">
+          <h4>Travel insurance</h4>
+          <p>Always buy comprehensive cover. Medical evacuation in Asia can run into five figures SGD.</p>
+        </div>
+        <div class="safety-tip">
+          <h4>Embassy contacts</h4>
+          <p>Save your embassy's address and emergency line offline. Screenshot it before you fly.</p>
+        </div>
+        <div class="safety-tip">
+          <h4>Scam awareness</h4>
+          <p>Use metered taxis, avoid "closed temple" tuk-tuk stories, never hand over your passport at small hotels.</p>
+        </div>
+        <div class="safety-tip">
+          <h4>Water &amp; food</h4>
+          <p>Bottled or filtered water in most of SE Asia. Eat where locals queue — busy stalls turn over fresh stock.</p>
+        </div>
+        <div class="safety-tip">
+          <h4>Transport</h4>
+          <p>Prefer Grab, Uber, or licensed taxis. Helmet on every motorbike ride. Trust your gut at night.</p>
+        </div>
+        <div class="safety-tip">
+          <h4>Health</h4>
+          <p>Pack a basic kit: rehydration salts, antihistamines, paracetamol, plasters. Check vaccine requirements 6 weeks out.</p>
+        </div>
+      </div>
+
+      <h3 class="advisory-title">Regional advisory snapshot</h3>
+      <div class="advisory-row">
+        <span class="badge low">Singapore · Low</span>
+        <span class="badge low">Japan · Low</span>
+        <span class="badge low">South Korea · Low</span>
+        <span class="badge low">Taiwan · Low</span>
+        <span class="badge low">Australia · Low</span>
+        <span class="badge moderate">Malaysia · Moderate</span>
+        <span class="badge moderate">Thailand · Moderate</span>
+        <span class="badge moderate">Vietnam · Moderate</span>
+        <span class="badge moderate">Indonesia · Moderate</span>
+        <span class="badge moderate">Hong Kong · Moderate</span>
+        <span class="badge moderate">Maldives · Moderate</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="enquiry" class="section">
+    <div class="container enquiry-wrap">
+      <div class="enquiry-copy">
+        <p class="eyebrow">Enquiry</p>
+        <h2 class="section-title">Tell us where you're dreaming of.</h2>
+        <p class="section-lede">Drop us your details and we'll send a custom shortlist — itineraries, costs, and on-the-ground tips for your trip.</p>
+      </div>
+
+      <form id="enquiry-form" class="enquiry-form" novalidate>
+        <label>Full Name *
+          <input type="text" name="name" required />
+        </label>
+        <label>Email *
+          <input type="email" name="email" required />
+        </label>
+        <label>Phone
+          <input type="tel" name="phone" />
+        </label>
+        <label>Destination of Interest
+          <select name="destination" id="enquiry-destination"></select>
+        </label>
+        <label>Travel Date
+          <input type="date" name="travelDate" />
+        </label>
+        <label>Number of Travellers
+          <input type="number" name="travellers" min="1" value="2" />
+        </label>
+        <label class="span-2">Message *
+          <textarea name="message" rows="4" required placeholder="Tell us about your trip — interests, pace, budget..."></textarea>
+        </label>
+        <button type="submit" class="btn btn-primary span-2">Submit Enquiry</button>
+        <p class="form-feedback" id="enquiry-feedback" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p class="brand">
+        <svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true">
+          <circle cx="20" cy="20" r="15" fill="none" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M20 6 L22.6 20 L20 34 L17.4 20 Z" fill="currentColor"/>
+          <path d="M6 20 L20 17.4 L34 20 L20 22.6 Z" fill="currentColor" opacity="0.5"/>
+        </svg>
+        <span>Travel Explorer</span>
+      </p>
+      <p class="footer-tag">We went, so you know where to go.</p>
+      <p class="footer-note">&copy; <span id="footer-year"></span> Travel Explorer · A static demo site. No bookings are processed here.</p>
+    </div>
+  </footer>
+
+  <div class="modal" id="guide-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel">
+      <button class="modal-close" data-close aria-label="Close guide">&times;</button>
+      <div class="modal-body" id="modal-body">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
