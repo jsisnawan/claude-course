@@ -15,3 +15,8 @@ Thumbs.db
 # Logs / temp
 *.log
 *.tmp
+
+# Local mail helper
+.env
+node_modules/
+package-lock.json

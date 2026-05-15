@@ -7,7 +7,7 @@
   <meta name="description" content="Curated travel guides with real prices, realistic itineraries, airport tips, safety notes, weather insights, and local recommendations." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <script>
     (function () {
@@ -26,9 +26,10 @@
     <div class="nav-inner">
       <a href="#home" class="brand" aria-label="Travel Explorer home">
         <svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true">
-          <circle cx="20" cy="20" r="15" fill="none" stroke="currentColor" stroke-width="1.4"/>
-          <path d="M20 6 L22.6 20 L20 34 L17.4 20 Z" fill="currentColor"/>
-          <path d="M6 20 L20 17.4 L34 20 L20 22.6 Z" fill="currentColor" opacity="0.5"/>
+          <polygon points="20,3 36,12 36,28 20,37 4,28 4,12" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <polygon points="20,10 30,15.5 30,24.5 20,30 10,24.5 10,15.5" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.55"/>
+          <circle cx="20" cy="20" r="2.6" fill="currentColor"/>
+          <path d="M20 6 L20 10 M34 13 L31 14.5 M34 27 L31 25.5 M20 34 L20 30 M6 27 L9 25.5 M6 13 L9 14.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/>
         </svg>
         <span>Travel Explorer</span>
       </a>
@@ -65,19 +66,27 @@
            onerror="window.__tryNextImg(this)" />
     </div>
     <div class="hero-overlay" aria-hidden="true"></div>
-    <div class="hero-content">
-      <p class="eyebrow">A travel magazine</p>
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-scanlines" aria-hidden="true"></div>
+    <div class="hero-content hud-frame">
+      <p class="eyebrow"><span class="dot"></span> SYS:: TRAVEL_EXPLORER // v2.0 // ONLINE</p>
       <h1>
         <span class="word" style="--i:0">We</span> <span class="word" style="--i:1">went,</span> <span class="word" style="--i:2">so</span> <span class="word" style="--i:3">you</span> <span class="word" style="--i:4">know</span> <span class="word" style="--i:5">where</span> <span class="word" style="--i:6">to</span> <span class="word" style="--i:7">go.</span>
       </h1>
       <p class="hero-sub">Curated travel guides with real prices, realistic itineraries, airport tips, safety notes, weather insights, and local recommendations.</p>
       <div class="hero-cta">
-        <a href="#guides" class="btn btn-primary">Read Latest Guide</a>
-        <a href="#enquiry" class="btn btn-ghost">Send Enquiry</a>
+        <a href="#guides" class="btn btn-primary" data-magnet>Read Latest Guide</a>
+        <a href="#enquiry" class="btn btn-ghost" data-magnet>Send Enquiry</a>
+      </div>
+      <div class="hero-readout" aria-hidden="true">
+        <span><em>LAT</em> 1.290°N</span>
+        <span><em>LON</em> 103.851°E</span>
+        <span><em>NODES</em> 12</span>
+        <span><em>UPLINK</em> STABLE</span>
       </div>
     </div>
     <a href="#guides" class="scroll-indicator" aria-label="Scroll to explore">
-      <span>Scroll to explore</span>
+      <span>// SCROLL</span>
       <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M6 9 L12 15 L18 9"/>
       </svg>
@@ -93,10 +102,16 @@
   </section>
 
   <section id="guides" class="section">
-    <div class="container">
-      <p class="eyebrow">Guides</p>
-      <h2 class="section-title">Real prices, real itineraries, no fluff.</h2>
+    <div class="container" data-reveal>
+      <p class="eyebrow">// MISSION_BRIEFING</p>
+      <h2 class="section-title" data-text="Real prices, real itineraries, no fluff.">Real prices, real itineraries, no fluff.</h2>
       <p class="section-lede">We hop on the plane, walk the streets, eat at the hole-in-the-wall noodle shop, and bring back honest notes on twelve of Asia-Pacific's most loved cities.</p>
+      <div class="stat-row">
+        <div class="stat-cell"><strong data-count="12">12</strong><span>CITY DOSSIERS</span></div>
+        <div class="stat-cell"><strong data-count="48">48</strong><span>FIELD DAYS</span></div>
+        <div class="stat-cell"><strong data-count="312">312</strong><span>NOTES LOGGED</span></div>
+        <div class="stat-cell"><strong>S+</strong><span>RARITY TIER</span></div>
+      </div>
     </div>
   </section>
 
@@ -109,8 +124,8 @@
   </section>
 
   <section id="tools" class="section section-alt">
-    <div class="container">
-      <p class="eyebrow">Travel Tools</p>
+    <div class="container" data-reveal>
+      <p class="eyebrow">// LOADOUT</p>
       <h2 class="section-title">Plan it before you board.</h2>
 
       <div class="tool-card">
@@ -181,8 +196,8 @@
   </section>
 
   <section id="weather" class="section">
-    <div class="container">
-      <p class="eyebrow">Weather</p>
+    <div class="container" data-reveal>
+      <p class="eyebrow">// ATMOS_SCAN</p>
       <h2 class="section-title">Check before you pack.</h2>
       <div class="weather-card">
         <form id="weather-form" class="weather-form" autocomplete="off">
@@ -195,8 +210,8 @@
   </section>
 
   <section id="safety" class="section section-alt">
-    <div class="container">
-      <p class="eyebrow">Safety</p>
+    <div class="container" data-reveal>
+      <p class="eyebrow">// THREAT_ASSESSMENT</p>
       <h2 class="section-title">Travel smart, travel safe.</h2>
       <p class="section-lede">General advisories — always cross-check with your government's travel notices before you fly.</p>
 
@@ -245,9 +260,9 @@
   </section>
 
   <section id="enquiry" class="section">
-    <div class="container enquiry-wrap">
+    <div class="container enquiry-wrap" data-reveal>
       <div class="enquiry-copy">
-        <p class="eyebrow">Enquiry</p>
+        <p class="eyebrow">// TRANSMIT</p>
         <h2 class="section-title">Tell us where you're dreaming of.</h2>
         <p class="section-lede">Drop us your details and we'll send a custom shortlist — itineraries, costs, and on-the-ground tips for your trip.</p>
       </div>
@@ -274,7 +289,7 @@
         <label class="span-2">Message *
           <textarea name="message" rows="4" required placeholder="Tell us about your trip — interests, pace, budget..."></textarea>
         </label>
-        <button type="submit" class="btn btn-primary span-2">Submit Enquiry</button>
+        <button type="submit" class="btn btn-primary span-2" data-magnet>Submit Enquiry</button>
         <p class="form-feedback" id="enquiry-feedback" role="status" aria-live="polite"></p>
       </form>
     </div>
@@ -284,9 +299,10 @@
     <div class="container footer-inner">
       <p class="brand">
         <svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true">
-          <circle cx="20" cy="20" r="15" fill="none" stroke="currentColor" stroke-width="1.4"/>
-          <path d="M20 6 L22.6 20 L20 34 L17.4 20 Z" fill="currentColor"/>
-          <path d="M6 20 L20 17.4 L34 20 L20 22.6 Z" fill="currentColor" opacity="0.5"/>
+          <polygon points="20,3 36,12 36,28 20,37 4,28 4,12" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <polygon points="20,10 30,15.5 30,24.5 20,30 10,24.5 10,15.5" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.55"/>
+          <circle cx="20" cy="20" r="2.6" fill="currentColor"/>
+          <path d="M20 6 L20 10 M34 13 L31 14.5 M34 27 L31 25.5 M20 34 L20 30 M6 27 L9 25.5 M6 13 L9 14.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/>
         </svg>
         <span>Travel Explorer</span>
       </p>

@@ -1,0 +1,12 @@
+{
+  "name": "travel-explorer-mail-helper",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Local-only helper that forwards enquiry form submissions over SMTP. The site itself remains a static HTML/CSS/JS bundle.",
+  "scripts": {
+    "mail": "node mail-server.js"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.14"
+  }
+}

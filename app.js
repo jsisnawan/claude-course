@@ -398,6 +398,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initModal();
   initNavToggle();
   initThemeToggle();
+  initReveal();
+  initMagnet();
   $("#footer-year").textContent = new Date().getFullYear();
 });
 
@@ -682,11 +684,24 @@ function initWeather() {
  * ENQUIRY FORM
  * ========================================================= */
 
+/*
+ * Enquiry delivery tries the following in order:
+ *   1. LOCAL_MAIL_ENDPOINT — the bundled mail-server.js helper running on
+ *      localhost. Start it with `npm install && npm run mail` after copying
+ *      .env.example to .env. Works only on the machine running the helper.
+ *   2. FORMSPREE_ENDPOINT — optional public fallback so the site still emails
+ *      when deployed (e.g. GitHub Pages). Leave the placeholder to skip.
+ *   3. mailto: — opens the visitor's email client, used as a last resort.
+ */
+const ENQUIRY_NOTIFICATION_EMAIL = "juanda.sisnawan@dynamitegames.io";
+const LOCAL_MAIL_ENDPOINT = "http://localhost:3000/send";
+const FORMSPREE_ENDPOINT = "YOUR_FORMSPREE_ENDPOINT_HERE";
+
 function initEnquiryForm() {
   const form = $("#enquiry-form");
   const feedback = $("#enquiry-feedback");
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
     feedback.classList.remove("success", "error");
 
@@ -707,15 +722,71 @@ function initEnquiryForm() {
     enquiries.push({ ...data, submittedAt: new Date().toISOString() });
     localStorage.setItem(STORAGE_KEYS.enquiries, JSON.stringify(enquiries));
 
-    feedback.textContent = "Thanks! Your enquiry is in — we'll be in touch within 24 hours.";
-    feedback.classList.add("success");
+    const sent = await sendEnquiryEmail(data);
+
+    if (sent === "local" || sent === "formspree") {
+      feedback.textContent = "Thanks! Your enquiry has been sent — we'll be in touch within 24 hours.";
+      feedback.classList.add("success");
+    } else if (sent === "mailto") {
+      feedback.textContent = "Thanks! Your email client has opened with the enquiry — hit Send to deliver it.";
+      feedback.classList.add("success");
+    } else {
+      feedback.textContent = "Saved locally, but email delivery failed. Please email us directly at " + ENQUIRY_NOTIFICATION_EMAIL + ".";
+      feedback.classList.add("error");
+      return;
+    }
+
     form.reset();
 
     setTimeout(() => {
       feedback.textContent = "";
       feedback.classList.remove("success");
-    }, 5000);
+    }, 6000);
   });
+}
+
+async function sendEnquiryEmail(data) {
+  if (LOCAL_MAIL_ENDPOINT) {
+    try {
+      const res = await fetch(LOCAL_MAIL_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) return "local";
+    } catch (_) { /* helper not running — fall through */ }
+  }
+
+  if (FORMSPREE_ENDPOINT && FORMSPREE_ENDPOINT !== "YOUR_FORMSPREE_ENDPOINT_HERE") {
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { "Accept": "application/json", "Content-Type": "application/json" },
+        body: JSON.stringify({
+          _subject: `New Travel Explorer enquiry from ${data.name}`,
+          _replyto: data.email,
+          ...data,
+        }),
+      });
+      if (res.ok) return "formspree";
+    } catch (_) { /* fall through to mailto */ }
+  }
+
+  const subject = `New Travel Explorer enquiry from ${data.name}`;
+  const bodyLines = [
+    `Name: ${data.name}`,
+    `Email: ${data.email}`,
+    `Phone: ${data.phone || "-"}`,
+    `Destination: ${data.destination || "-"}`,
+    `Travel Date: ${data.travelDate || "-"}`,
+    `Travellers: ${data.travellers || "-"}`,
+    "",
+    "Message:",
+    data.message,
+  ];
+  const mailto = `mailto:${ENQUIRY_NOTIFICATION_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join("\n"))}`;
+  window.location.href = mailto;
+  return "mailto";
 }
 
 /* =========================================================
@@ -842,5 +913,40 @@ function initNavToggle() {
       links.classList.remove("open");
       toggle.setAttribute("aria-expanded", "false");
     }
+  });
+}
+
+function initReveal() {
+  const targets = document.querySelectorAll("[data-reveal]");
+  if (!targets.length) return;
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+    targets.forEach((el) => el.classList.add("in-view"));
+    return;
+  }
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) {
+        e.target.classList.add("in-view");
+        io.unobserve(e.target);
+      }
+    }
+  }, { threshold: 0.12 });
+  targets.forEach((el) => io.observe(el));
+}
+
+function initMagnet() {
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (matchMedia("(pointer: coarse)").matches) return;
+  document.querySelectorAll("[data-magnet]").forEach((el) => {
+    const strength = 0.28;
+    el.addEventListener("pointermove", (e) => {
+      const b = el.getBoundingClientRect();
+      const x = e.clientX - (b.left + b.width / 2);
+      const y = e.clientY - (b.top + b.height / 2);
+      el.style.transform = `translate(${x * strength}px, ${y * strength}px)`;
+    });
+    el.addEventListener("pointerleave", () => {
+      el.style.transform = "";
+    });
   });
 }
