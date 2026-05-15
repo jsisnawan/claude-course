@@ -2,6 +2,8 @@
 
 > We went, so you know where to go.
 
+[![Deploy to GitHub Pages](https://github.com/jsisnawan/claude-course/actions/workflows/pages.yml/badge.svg)](https://github.com/jsisnawan/claude-course/actions/workflows/pages.yml)
+
 **Live demo:** <https://jsisnawan.github.io/claude-course/>
 
 A stylish, editorial-magazine-style single-page travel discovery site. 12 curated Asia-Pacific city guides, interactive travel tools, and a polished light/dark experience — built with **only HTML, CSS, and JavaScript**. No frameworks, no build step, no backend.
