@@ -18,6 +18,16 @@
         document.documentElement.setAttribute("data-theme", theme);
       } catch (e) {}
     })();
+    (function () {
+      try {
+        var lang = localStorage.getItem("travelExplorer.lang");
+        if (!lang) {
+          var nav = (navigator.language || "en").slice(0, 2);
+          lang = ["en", "ja", "ko"].indexOf(nav) !== -1 ? nav : "en";
+        }
+        document.documentElement.lang = lang;
+      } catch (e) {}
+    })();
   </script>
 </head>
 <body>
@@ -37,13 +47,18 @@
         <span></span><span></span><span></span>
       </button>
       <nav class="nav-links" aria-label="Primary">
-        <a href="#home">Home</a>
-        <a href="#guides">Guides</a>
-        <a href="#cities">Cities</a>
-        <a href="#tools">Travel Tools</a>
-        <a href="#weather">Weather</a>
-        <a href="#safety">Safety</a>
-        <a href="#enquiry">Enquiry</a>
+        <a href="#home" data-i18n="nav.home">Home</a>
+        <a href="#guides" data-i18n="nav.guides">Guides</a>
+        <a href="#cities" data-i18n="nav.cities">Cities</a>
+        <a href="#tools" data-i18n="nav.tools">Travel Tools</a>
+        <a href="#weather" data-i18n="nav.weather">Weather</a>
+        <a href="#safety" data-i18n="nav.safety">Safety</a>
+        <a href="#enquiry" data-i18n="nav.enquiry">Enquiry</a>
+        <select class="lang-switcher" id="lang-switcher" aria-label="Select language">
+          <option value="en">EN</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+        </select>
         <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light or dark theme" type="button">
           <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="4"/>
@@ -69,24 +84,24 @@
     <div class="hero-grid" aria-hidden="true"></div>
     <div class="hero-scanlines" aria-hidden="true"></div>
     <div class="hero-content hud-frame">
-      <p class="eyebrow"><span class="dot"></span> SYS:: TRAVEL_EXPLORER // v2.0 // ONLINE</p>
-      <h1>
+      <p class="eyebrow"><span class="dot"></span> <span data-i18n="hero.eyebrow">SYS:: TRAVEL_EXPLORER // v2.0 // ONLINE</span></p>
+      <h1 id="hero-title" data-i18n-hero="hero.title">
         <span class="word" style="--i:0">We</span> <span class="word" style="--i:1">went,</span> <span class="word" style="--i:2">so</span> <span class="word" style="--i:3">you</span> <span class="word" style="--i:4">know</span> <span class="word" style="--i:5">where</span> <span class="word" style="--i:6">to</span> <span class="word" style="--i:7">go.</span>
       </h1>
-      <p class="hero-sub">Curated travel guides with real prices, realistic itineraries, airport tips, safety notes, weather insights, and local recommendations.</p>
+      <p class="hero-sub" data-i18n="hero.sub">Curated travel guides with real prices, realistic itineraries, airport tips, safety notes, weather insights, and local recommendations.</p>
       <div class="hero-cta">
-        <a href="#guides" class="btn btn-primary" data-magnet>Read Latest Guide</a>
-        <a href="#enquiry" class="btn btn-ghost" data-magnet>Send Enquiry</a>
+        <a href="#guides" class="btn btn-primary" data-magnet data-i18n="hero.cta.guides">Read Latest Guide</a>
+        <a href="#enquiry" class="btn btn-ghost" data-magnet data-i18n="hero.cta.enquiry">Send Enquiry</a>
       </div>
       <div class="hero-readout" aria-hidden="true">
         <span><em>LAT</em> 1.290°N</span>
         <span><em>LON</em> 103.851°E</span>
-        <span><em>NODES</em> 12</span>
-        <span><em>UPLINK</em> STABLE</span>
+        <span><em data-i18n="hero.readout.nodes">NODES</em> 12</span>
+        <span><em data-i18n="hero.readout.uplink">UPLINK</em> STABLE</span>
       </div>
     </div>
-    <a href="#guides" class="scroll-indicator" aria-label="Scroll to explore">
-      <span>// SCROLL</span>
+    <a href="#guides" class="scroll-indicator" data-i18n-attr="aria-label:hero.scroll_label" aria-label="Scroll to explore">
+      <span data-i18n="hero.scroll">// SCROLL</span>
       <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M6 9 L12 15 L18 9"/>
       </svg>
@@ -103,14 +118,14 @@
 
   <section id="guides" class="section">
     <div class="container" data-reveal>
-      <p class="eyebrow">// MISSION_BRIEFING</p>
-      <h2 class="section-title" data-text="Real prices, real itineraries, no fluff.">Real prices, real itineraries, no fluff.</h2>
-      <p class="section-lede">We hop on the plane, walk the streets, eat at the hole-in-the-wall noodle shop, and bring back honest notes on twelve of Asia-Pacific's most loved cities.</p>
+      <p class="eyebrow" data-i18n="guides.eyebrow">// MISSION_BRIEFING</p>
+      <h2 class="section-title" data-text="Real prices, real itineraries, no fluff." data-i18n="guides.title">Real prices, real itineraries, no fluff.</h2>
+      <p class="section-lede" data-i18n="guides.lede">We hop on the plane, walk the streets, eat at the hole-in-the-wall noodle shop, and bring back honest notes on twelve of Asia-Pacific's most loved cities.</p>
       <div class="stat-row">
-        <div class="stat-cell"><strong data-count="12">12</strong><span>CITY DOSSIERS</span></div>
-        <div class="stat-cell"><strong data-count="48">48</strong><span>FIELD DAYS</span></div>
-        <div class="stat-cell"><strong data-count="312">312</strong><span>NOTES LOGGED</span></div>
-        <div class="stat-cell"><strong>S+</strong><span>RARITY TIER</span></div>
+        <div class="stat-cell"><strong data-count="12">12</strong><span data-i18n="guides.stat.dossiers">CITY DOSSIERS</span></div>
+        <div class="stat-cell"><strong data-count="48">48</strong><span data-i18n="guides.stat.days">FIELD DAYS</span></div>
+        <div class="stat-cell"><strong data-count="312">312</strong><span data-i18n="guides.stat.notes">NOTES LOGGED</span></div>
+        <div class="stat-cell"><strong>S+</strong><span data-i18n="guides.stat.rarity">RARITY TIER</span></div>
       </div>
     </div>
   </section>
@@ -125,70 +140,70 @@
 
   <section id="tools" class="section section-alt">
     <div class="container" data-reveal>
-      <p class="eyebrow">// LOADOUT</p>
-      <h2 class="section-title">Plan it before you board.</h2>
+      <p class="eyebrow" data-i18n="tools.eyebrow">// LOADOUT</p>
+      <h2 class="section-title" data-i18n="tools.title">Plan it before you board.</h2>
 
       <div class="tool-card">
-        <h3>Trip Budget Calculator</h3>
+        <h3 data-i18n="tools.budget.title">Trip Budget Calculator</h3>
         <div class="tool-grid">
-          <label>Destination
+          <label data-i18n="tools.budget.destination">Destination
             <select id="budget-destination"></select>
           </label>
-          <label>Travellers
+          <label data-i18n="tools.budget.travellers">Travellers
             <input type="number" id="budget-travellers" min="1" value="2" />
           </label>
-          <label>Days
+          <label data-i18n="tools.budget.days">Days
             <input type="number" id="budget-days" min="1" value="5" />
           </label>
-          <label>Daily budget per person (SGD)
+          <label data-i18n="tools.budget.daily">Daily budget per person (SGD)
             <input type="number" id="budget-daily" min="0" value="150" />
           </label>
         </div>
         <div class="tool-result">
-          <span>Estimated total</span>
+          <span data-i18n="tools.budget.result_label">Estimated total</span>
           <strong id="budget-total">SGD 1,500</strong>
         </div>
       </div>
 
       <div class="tool-card">
-        <h3>Currency Converter</h3>
+        <h3 data-i18n="tools.fx.title">Currency Converter</h3>
         <div class="tool-grid">
-          <label>Amount (SGD)
+          <label data-i18n="tools.fx.amount">Amount (SGD)
             <input type="number" id="fx-amount" min="0" value="100" />
           </label>
-          <label>Convert to
+          <label data-i18n="tools.fx.convert_to">Convert to
             <select id="fx-target"></select>
           </label>
         </div>
         <div class="tool-result">
-          <span>Approx</span>
+          <span data-i18n="tools.fx.result_label">Approx</span>
           <strong id="fx-result">—</strong>
         </div>
-        <p class="tool-note">Static reference rates. Swap in a live FX API for production.</p>
+        <p class="tool-note" data-i18n="tools.fx.note">Static reference rates. Swap in a live FX API for production.</p>
       </div>
 
       <div class="tool-card">
-        <h3>Packing Checklist</h3>
-        <p class="tool-note">Your ticks save automatically.</p>
+        <h3 data-i18n="tools.packing.title">Packing Checklist</h3>
+        <p class="tool-note" data-i18n="tools.packing.note">Your ticks save automatically.</p>
         <div class="packing" id="packing"></div>
       </div>
 
       <div class="tool-card">
-        <h3>Itinerary Planner</h3>
+        <h3 data-i18n="tools.itinerary.title">Itinerary Planner</h3>
         <form id="itinerary-form" class="tool-grid" autocomplete="off">
-          <label>Day
+          <label data-i18n="tools.itinerary.day">Day
             <input type="number" id="itin-day" min="1" value="1" required />
           </label>
-          <label>Time
+          <label data-i18n="tools.itinerary.time">Time
             <input type="time" id="itin-time" required />
           </label>
-          <label class="span-2">Activity
-            <input type="text" id="itin-activity" placeholder="Visit Marina Bay Gardens" required />
+          <label class="span-2" data-i18n="tools.itinerary.activity">Activity
+            <input type="text" id="itin-activity" data-i18n-attr="placeholder:tools.itinerary.activity_placeholder" placeholder="Visit Marina Bay Gardens" required />
           </label>
-          <label class="span-2">Notes
-            <input type="text" id="itin-notes" placeholder="Buy tickets in advance" />
+          <label class="span-2" data-i18n="tools.itinerary.notes">Notes
+            <input type="text" id="itin-notes" data-i18n-attr="placeholder:tools.itinerary.notes_placeholder" placeholder="Buy tickets in advance" />
           </label>
-          <button type="submit" class="btn btn-primary span-2">Add to itinerary</button>
+          <button type="submit" class="btn btn-primary span-2" data-i18n="tools.itinerary.add_btn">Add to itinerary</button>
         </form>
         <ul class="itinerary-list" id="itinerary-list"></ul>
       </div>
@@ -197,12 +212,12 @@
 
   <section id="weather" class="section">
     <div class="container" data-reveal>
-      <p class="eyebrow">// ATMOS_SCAN</p>
-      <h2 class="section-title">Check before you pack.</h2>
+      <p class="eyebrow" data-i18n="weather.eyebrow">// ATMOS_SCAN</p>
+      <h2 class="section-title" data-i18n="weather.title">Check before you pack.</h2>
       <div class="weather-card">
         <form id="weather-form" class="weather-form" autocomplete="off">
-          <input type="text" id="weather-city" placeholder="Type a city (e.g. Tokyo)" required />
-          <button type="submit" class="btn btn-primary">Check Weather</button>
+          <input type="text" id="weather-city" data-i18n-attr="placeholder:weather.placeholder" placeholder="Type a city (e.g. Tokyo)" required />
+          <button type="submit" class="btn btn-primary" data-i18n="weather.check_btn">Check Weather</button>
         </form>
         <div class="weather-result" id="weather-result" hidden></div>
       </div>
@@ -211,50 +226,50 @@
 
   <section id="safety" class="section section-alt">
     <div class="container" data-reveal>
-      <p class="eyebrow">// THREAT_ASSESSMENT</p>
-      <h2 class="section-title">Travel smart, travel safe.</h2>
-      <p class="section-lede">General advisories — always cross-check with your government's travel notices before you fly.</p>
+      <p class="eyebrow" data-i18n="safety.eyebrow">// THREAT_ASSESSMENT</p>
+      <h2 class="section-title" data-i18n="safety.title">Travel smart, travel safe.</h2>
+      <p class="section-lede" data-i18n="safety.lede">General advisories — always cross-check with your government's travel notices before you fly.</p>
 
       <div class="safety-grid">
         <div class="safety-tip">
-          <h4>Travel insurance</h4>
-          <p>Always buy comprehensive cover. Medical evacuation in Asia can run into five figures SGD.</p>
+          <h4 data-i18n="safety.tip1.title">Travel insurance</h4>
+          <p data-i18n="safety.tip1.body">Always buy comprehensive cover. Medical evacuation in Asia can run into five figures SGD.</p>
         </div>
         <div class="safety-tip">
-          <h4>Embassy contacts</h4>
-          <p>Save your embassy's address and emergency line offline. Screenshot it before you fly.</p>
+          <h4 data-i18n="safety.tip2.title">Embassy contacts</h4>
+          <p data-i18n="safety.tip2.body">Save your embassy's address and emergency line offline. Screenshot it before you fly.</p>
         </div>
         <div class="safety-tip">
-          <h4>Scam awareness</h4>
-          <p>Use metered taxis, avoid "closed temple" tuk-tuk stories, never hand over your passport at small hotels.</p>
+          <h4 data-i18n="safety.tip3.title">Scam awareness</h4>
+          <p data-i18n="safety.tip3.body">Use metered taxis, avoid "closed temple" tuk-tuk stories, never hand over your passport at small hotels.</p>
         </div>
         <div class="safety-tip">
-          <h4>Water &amp; food</h4>
-          <p>Bottled or filtered water in most of SE Asia. Eat where locals queue — busy stalls turn over fresh stock.</p>
+          <h4 data-i18n="safety.tip4.title">Water &amp; food</h4>
+          <p data-i18n="safety.tip4.body">Bottled or filtered water in most of SE Asia. Eat where locals queue — busy stalls turn over fresh stock.</p>
         </div>
         <div class="safety-tip">
-          <h4>Transport</h4>
-          <p>Prefer Grab, Uber, or licensed taxis. Helmet on every motorbike ride. Trust your gut at night.</p>
+          <h4 data-i18n="safety.tip5.title">Transport</h4>
+          <p data-i18n="safety.tip5.body">Prefer Grab, Uber, or licensed taxis. Helmet on every motorbike ride. Trust your gut at night.</p>
         </div>
         <div class="safety-tip">
-          <h4>Health</h4>
-          <p>Pack a basic kit: rehydration salts, antihistamines, paracetamol, plasters. Check vaccine requirements 6 weeks out.</p>
+          <h4 data-i18n="safety.tip6.title">Health</h4>
+          <p data-i18n="safety.tip6.body">Pack a basic kit: rehydration salts, antihistamines, paracetamol, plasters. Check vaccine requirements 6 weeks out.</p>
         </div>
       </div>
 
-      <h3 class="advisory-title">Regional advisory snapshot</h3>
+      <h3 class="advisory-title" data-i18n="safety.advisory_title">Regional advisory snapshot</h3>
       <div class="advisory-row">
-        <span class="badge low">Singapore · Low</span>
-        <span class="badge low">Japan · Low</span>
-        <span class="badge low">South Korea · Low</span>
-        <span class="badge low">Taiwan · Low</span>
-        <span class="badge low">Australia · Low</span>
-        <span class="badge moderate">Malaysia · Moderate</span>
-        <span class="badge moderate">Thailand · Moderate</span>
-        <span class="badge moderate">Vietnam · Moderate</span>
-        <span class="badge moderate">Indonesia · Moderate</span>
-        <span class="badge moderate">Hong Kong · Moderate</span>
-        <span class="badge moderate">Maldives · Moderate</span>
+        <span class="badge low" data-i18n="safety.badge.singapore">Singapore · Low</span>
+        <span class="badge low" data-i18n="safety.badge.japan">Japan · Low</span>
+        <span class="badge low" data-i18n="safety.badge.south_korea">South Korea · Low</span>
+        <span class="badge low" data-i18n="safety.badge.taiwan">Taiwan · Low</span>
+        <span class="badge low" data-i18n="safety.badge.australia">Australia · Low</span>
+        <span class="badge moderate" data-i18n="safety.badge.malaysia">Malaysia · Moderate</span>
+        <span class="badge moderate" data-i18n="safety.badge.thailand">Thailand · Moderate</span>
+        <span class="badge moderate" data-i18n="safety.badge.vietnam">Vietnam · Moderate</span>
+        <span class="badge moderate" data-i18n="safety.badge.indonesia">Indonesia · Moderate</span>
+        <span class="badge moderate" data-i18n="safety.badge.hong_kong">Hong Kong · Moderate</span>
+        <span class="badge moderate" data-i18n="safety.badge.maldives">Maldives · Moderate</span>
       </div>
     </div>
   </section>
@@ -262,34 +277,34 @@
   <section id="enquiry" class="section">
     <div class="container enquiry-wrap" data-reveal>
       <div class="enquiry-copy">
-        <p class="eyebrow">// TRANSMIT</p>
-        <h2 class="section-title">Tell us where you're dreaming of.</h2>
-        <p class="section-lede">Drop us your details and we'll send a custom shortlist — itineraries, costs, and on-the-ground tips for your trip.</p>
+        <p class="eyebrow" data-i18n="enquiry.eyebrow">// TRANSMIT</p>
+        <h2 class="section-title" data-i18n="enquiry.title">Tell us where you're dreaming of.</h2>
+        <p class="section-lede" data-i18n="enquiry.lede">Drop us your details and we'll send a custom shortlist — itineraries, costs, and on-the-ground tips for your trip.</p>
       </div>
 
       <form id="enquiry-form" class="enquiry-form" novalidate>
-        <label>Full Name *
+        <label data-i18n="enquiry.field.name">Full Name *
           <input type="text" name="name" required />
         </label>
-        <label>Email *
+        <label data-i18n="enquiry.field.email">Email *
           <input type="email" name="email" required />
         </label>
-        <label>Phone
+        <label data-i18n="enquiry.field.phone">Phone
           <input type="tel" name="phone" />
         </label>
-        <label>Destination of Interest
+        <label data-i18n="enquiry.field.destination">Destination of Interest
           <select name="destination" id="enquiry-destination"></select>
         </label>
-        <label>Travel Date
+        <label data-i18n="enquiry.field.travel_date">Travel Date
           <input type="date" name="travelDate" />
         </label>
-        <label>Number of Travellers
+        <label data-i18n="enquiry.field.travellers">Number of Travellers
           <input type="number" name="travellers" min="1" value="2" />
         </label>
-        <label class="span-2">Message *
-          <textarea name="message" rows="4" required placeholder="Tell us about your trip — interests, pace, budget..."></textarea>
+        <label class="span-2" data-i18n="enquiry.field.message">Message *
+          <textarea name="message" rows="4" required data-i18n-attr="placeholder:enquiry.field.message_placeholder" placeholder="Tell us about your trip — interests, pace, budget..."></textarea>
         </label>
-        <button type="submit" class="btn btn-primary span-2" data-magnet>Submit Enquiry</button>
+        <button type="submit" class="btn btn-primary span-2" data-magnet data-i18n="enquiry.submit_btn">Submit Enquiry</button>
         <p class="form-feedback" id="enquiry-feedback" role="status" aria-live="polite"></p>
       </form>
     </div>
@@ -306,15 +321,52 @@
         </svg>
         <span>Travel Explorer</span>
       </p>
-      <p class="footer-tag">We went, so you know where to go.</p>
-      <p class="footer-note">&copy; <span id="footer-year"></span> Travel Explorer · A static demo site. No bookings are processed here.</p>
+      <p class="footer-tag" data-i18n="footer.tag">We went, so you know where to go.</p>
+      <div class="footer-socials" aria-label="Follow Travel Explorer on social media">
+        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Travel Explorer on Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Travel Explorer on TikTok">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 3v12a4 4 0 1 1-4-4"/>
+            <path d="M9 3c0 3 2 5 5 5"/>
+          </svg>
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Travel Explorer on Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 4h-2a3 3 0 0 0-3 3v3H7v3h2v8h3v-8h2.5l.5-3H12V7a1 1 0 0 1 1-1h2z"/>
+          </svg>
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Travel Explorer on X (Twitter)">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4 L20 20 M20 4 L4 20"/>
+          </svg>
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Travel Explorer on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="3"/>
+            <path d="M7 10v7M7 7v.01M11 17v-7M11 13c0-2 1-3 3-3s3 1 3 3v4"/>
+          </svg>
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Travel Explorer on Threads">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3a9 9 0 1 0 6 16"/>
+            <path d="M9 11c1-3 6-3 6 0s-2 3-4 3-5-1-5-4 3-5 6-5 4 1 5 3"/>
+          </svg>
+        </a>
+      </div>
+      <p class="footer-note">&copy; <span id="footer-year"></span> Travel Explorer · <span data-i18n="footer.note">A static demo site. No bookings are processed here.</span></p>
     </div>
   </footer>
 
   <div class="modal" id="guide-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
     <div class="modal-backdrop" data-close></div>
     <div class="modal-panel">
-      <button class="modal-close" data-close aria-label="Close guide">&times;</button>
+      <button class="modal-close" data-close data-i18n-attr="aria-label:modal.close_label" aria-label="Close guide">&times;</button>
       <div class="modal-body" id="modal-body">
         <!-- Filled by JS -->
       </div>
